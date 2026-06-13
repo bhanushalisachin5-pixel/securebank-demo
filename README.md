@@ -1,2 +1,26 @@
-# securebank-demo
-🏦 SecureBank Login UI - A modern banking login page built with HTML &amp; CSS featuring Glassmorphism, Floating Labels, Glow Effects, Gradient Icons, and Responsive Design. Inspired by modern fintech and banking applications with a clean and secure user experience.
+# 🏦 SecureBank Demo
+
+A modern Banking Login UI built using HTML, CSS, PHP, and MySQL.
+
+## Features
+
+- Modern Banking UI
+- Responsive Design
+- Glassmorphism Effects
+- Floating Labels
+- Secure Login System
+- PHP + MySQL Database
+
+## Technologies Used
+
+- HTML5
+- CSS3
+- JavaScript
+- PHP
+- MySQL
+
+## Author
+
+Sachin Gori
+
+BCA Student | Aspiring Web Developer
