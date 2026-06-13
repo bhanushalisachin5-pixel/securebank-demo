@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --bg1:#061a3b;
+    --bg2:#0b2f6e;
+    --card1:rgba(16, 33, 70, 0.92);
+    --card2:rgba(10, 26, 60, 0.92);
+    --stroke:rgba(176,179,183,0.35);
+    --primary:#4F8DFF;
+    --primary2:#1B3C7E;
+    --text:rgba(255,255,255,0.92);
+    --muted:rgba(255,255,255,0.62);
+    --shadow: 0 30px 80px rgba(0,0,0,.55);
+  }
+
+  body{
+    min-height:100vh;
+    overflow-x:hidden;
+    overflow-y:auto;
+    font-family:Poppins, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background: radial-gradient(circle at 20% 20%, rgba(79,141,255,.25), transparent 45%),
+                radial-gradient(circle at 85% 35%, rgba(0,180,255,.12), transparent 40%),
+                linear-gradient(160deg, var(--bg1), var(--bg2));
+  }
+
+  #scene{
+    position:relative;
+    width:100vw;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    padding-left:40px;
+  }
+
+  #bg{
+    position:absolute;
+    inset:0;
+    background:
+      radial-gradient(circle at 90% 30%, rgba(5, 26, 61, 0.55), transparent 50%),
+      url('img.png');
+    background-size:cover;
+    background-position:center;
+    filter:saturate(1.05) contrast(1.03);
+    transform: scale(1.04);
+  }
+
+  #veil{
+    position:absolute;
+    inset:0;
+    background: linear-gradient(90deg, rgba(4,12,30,.78), rgba(4,12,30,.28) 55%, rgba(4,12,30,.65));
+    backdrop-filter: blur(2px);
+  }
+
+  .blob{
+    position:absolute;
+    width:360px;
+    height:360px;
+    border-radius:50%;
+    background: radial-gradient(circle at 30% 30%, rgba(79,141,255,.35), rgba(79,141,255,0) 60%);
+    filter: blur(2px);
+    opacity:.9;
+    animation: floaty 8s ease-in-out infinite;
+    pointer-events:none;
+  }
+  .blob.b1{left: -90px; top: 60px; animation-duration: 9.5s;}
+  .blob.b2{right: 80px; top: -40px; animation-duration: 11s; background: radial-gradient(circle at 30% 30%, rgba(0,200,255,.22), rgba(0,200,255,0) 60%);}
+  .blob.b3{right: 20px; bottom: -110px; animation-duration: 12.5s; width:420px; height:420px; background: radial-gradient(circle at 30% 30%, rgba(79,141,255,.22), rgba(79,141,255,0) 62%);}
+
+  @keyframes floaty{
+    0%,100%{transform: translateY(0) translateX(0) scale(1);}
+    50%{transform: translateY(-18px) translateX(12px) scale(1.04);}
+  }
+
+  #intro{
+    position:relative;
+    z-index:2;
+    width:min(520px, 45vw);
+    margin-top:40px;
+    animation: fadeUp .9s ease .05s both;
+  }
+
+  @keyframes fadeUp{
+    from{opacity:0; transform: translateY(10px);}
+    to{opacity:1; transform: translateY(0);}
+  }
+
+  #brand{
+    position:relative;
+    z-index:2;
+    color:#fff;
+    display:flex;
+    gap:14px;
+    align-items:flex-start;
+    margin-bottom:18px;
+    animation: fadeUp .7s ease both;
+  }
+
+  #logoIcon{
+    width:46px;
+    height:46px;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background: rgba(18, 65, 150, .35);
+    border:1px solid rgba(79,141,255,.35);
+    box-shadow: 0 10px 25px rgba(0,0,0,.25);
+  }
+
+  #brand h4{
+    font-size:24px;
+    line-height:1.1;
+    margin-top:8px;
+    font-weight:700;
+    letter-spacing:.2px;
+  }
+
+  .gradText{
+    background: linear-gradient(90deg, rgb(72, 140, 250), rgb(27, 60, 126));
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-clip:text;
+  }
+
+  #tagline{
+    display:block;
+    margin-top:6px;
+    font-size:12px;
+    font-weight:600;
+    color: rgba(255,255,255,0.78);
+    text-shadow: 0 0 12px rgba(79,141,255,.35);
+  }
+
+  #welcome{
+    color: var(--text);
+    font-size:22px;
+    font-weight:650;
+    text-shadow: 0 0 10px rgba(0,0,0,.35);
+    margin-bottom:10px;
+  }
+
+  #welcome span{color:#4F8DFF;}
+
+  #seq{
+    color: rgba(255,255,255,0.72);
+    font-size:13px;
+    font-weight:400;
+    line-height:1.5;
+  }
+
+  #copyright{
+    position:absolute;
+    left: 40px;
+    bottom: 18px;
+    z-index:2;
+    color: rgba(255,255,255,0.6);
+    font-size:11px;
+    font-weight:300;
+  }
+
+  #con{
+    position:relative;
+    z-index:3;
+    margin-left:auto;
+    margin-right:40px;
+    width:380px;
+    height:auto;
+    border-radius:16px;
+    padding:26px 22px 22px;
+    background:
+      radial-gradient(circle at 15% 15%, rgba(23, 61, 122, 0.45), transparent 40%),
+      linear-gradient(135deg, var(--card1), var(--card2));
+    border: 1px solid var(--stroke);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(12px);
+    animation: cardIn .7s ease .1s both;
+  }
+
+  @keyframes cardIn{
+    from{opacity:0; transform: translateX(18px) scale(.98);}
+    to{opacity:1; transform: translateX(0) scale(1);}
+  }
+
+  #cardHeader{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:10px;
+  }
+
+  #top-lo{
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background: linear-gradient(150deg, rgb(43, 73, 121), rgb(15, 43, 100), rgb(15, 43, 100));
+    border: 1px solid rgba(176, 179, 183, 0.327);
+  }
+
+  #in-logo{
+    font-size:23px;
+    background: linear-gradient(120deg, rgb(155, 189, 242), rgb(72, 138, 244), rgb(6, 92, 230));
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-clip:text;
+  }
+
+  #log{color: #fff; font-weight:700; font-size:20px;}
+  #ent-text{color: rgba(255,255,255,0.62); font-size:12px; font-weight:400; margin-top:4px;}
+
+  .form{
+    margin-top:16px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+
+  .input-group{position:relative; width:100%;}
+
+  .input-group input{
+    width:100%;
+    padding:16px 14px;
+    font-size:14px;
+    background: rgba(255, 255, 255, 0.03);
+    color:#fff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius:12px;
+    outline:none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .input-group i.toggle-pass {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    cursor: pointer;
+    z-index: 5;
+  }
+
+  .input-group input:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .input-group input:focus{
+    border-color: rgba(79,141,255,.95);
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 15px rgba(79, 141, 255, 0.15);
+  }
+
+  .input-group label{
+    position:absolute;
+    left:14px;
+    top:50%;
+    transform: translateY(-50%);
+    color: rgba(255,255,255,.55);
+    font-size:14px;
+    font-weight:400;
+    pointer-events:none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .input-group input:focus + label,
+  .input-group input:valid + label{
+    top: 0;
+    font-size:12px;
+    color: #4F8DFF;
+    background: #0f224b;
+    padding: 0 8px;
+  }
+
+  #but{
+    width:100%;
+    border:none;
+    border-radius:10px;
+    padding:13px 14px;
+    cursor:pointer;
+    background: linear-gradient(90deg, rgb(72, 138, 244), rgb(6, 92, 230));
+    color:#fff;
+    font-size:14px;
+    font-weight:700;
+    box-shadow: 0 14px 35px rgba(6, 92, 230, .25);
+    transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+  }
+  #but:hover{transform: translateY(-2px); box-shadow: 0 18px 45px rgba(6, 92, 230, .32); filter:saturate(1.05);} 
+  #but:active{transform: translateY(1px) scale(.99);} 
+
+  .row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-top:2px;
+  }
+
+  .link{
+    font-size:12px;
+    color: var(--primary);
+    text-decoration:none;
+    font-weight:400;
+  }
+  .link:hover{ text-decoration:underline; }
+
+  #or{
+    margin-top:10px;
+    text-align:center;
+    color: rgba(255,255,255,0.9);
+    font-size:12px;
+    font-weight:400;
+  }
+
+  #ac{
+    font-size:12px;
+    font-weight:400;
+    color: rgba(255,255,255,0.85);
+  }
+  #sig{color:#4F8DFF; font-weight:600; text-decoration:none;}
+  #sig:hover{text-decoration:underline;}
+
+  .shake{animation: shake .35s ease;}
+  @keyframes shake{
+    0%{transform: translateX(0);} 
+    30%{transform: translateX(-4px);} 
+    70%{transform: translateX(4px);} 
+    100%{transform: translateX(0);} 
+  }
+
+  @media (max-width: 900px){
+    #scene{padding: 40px 20px; justify-content:center; align-items: flex-start;}
+    #intro{display:none;}
+    #con{margin:0; width: min(420px, 92vw);}
+    #copyright{left:20px;}
+  }
+
+  #errorPopup {
+    position: fixed; top: 20px; right: 20px; background: #ff4f4f; color: #fff;
+    padding: 15px 25px; border-radius: 10px; transform: translateY(-150%);
+    transition: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); z-index: 9999;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3); font-size: 14px; font-weight: 600;
+    display: flex; align-items: center; gap: 10px;
+  }
+</style>
+</head>
+<body>
+  <div id="scene">
+    <div id="bg" aria-hidden="true"></div>
+    <div id="veil" aria-hidden="true"></div>
+    <div class="blob b1" aria-hidden="true"></div>
+    <div class="blob b2" aria-hidden="true"></div>
+    <div class="blob b3" aria-hidden="true"></div>
+    <div id="errorPopup"><i class="fa-solid fa-circle-exclamation"></i> <span id="errorMsg"></span></div>
+
+    <div id="intro">
+      <div id="brand">
+        <div id="logoIcon" aria-hidden="true"><i class="fa-solid fa-building-columns" style="color:#4F8DFF;"></i></div>
+        <h4>
+          Secure<span class="gradText">bank</span>
+          <span id="tagline">your money, our priority</span>
+        </h4>
+      </div>
+
+      <h3 id="welcome">Welcome Back! <br><span>Login to Your Account</span></h3>
+      <i class="fa-solid fa-shield-halved" id="shield" aria-hidden="true"></i>
+      <h6 id="seq">Your security is our top priority. Please login to continue.</h6>
+    </div>
+
+    <section id="con" aria-label="Bank login">
+      <div id="cardHeader">
+        <div id="top-lo" aria-hidden="true"><i class="fa-solid fa-building-columns" id="in-logo"></i></div>
+        <div>
+          <h3 id="log">Login</h3>
+          <h6 id="ent-text">Enter your credentials to access your account</h6>
+        </div>
+      </div>
+      <form class="form" action="data.php" method="post" autocomplete="on" id="loginForm">
+        <div class="input-group">
+          <input type="text" name="username" required autocomplete="off" placeholder="" aria-label="Username or email" />
+          <label>Enter Username / Email</label>
+        </div>
+
+        <div class="input-group">
+          <input type="password" name="password" id="passInput" required autocomplete="new-password" placeholder="" aria-label="Password" />
+          <label>Enter password</label>
+          <i class="fa-solid fa-eye toggle-pass" id="togglePass"></i>
+        </div>
+
+        <div class="row">
+          <label style="color:var(--muted); font-size:12px; display:flex; align-items:center; gap:5px; cursor:pointer;">
+            <input type="checkbox" name="remember"> Remember me
+          </label>
+          <a href="#" class="link">Forgot password?</a>
+        </div>
+
+        <button id="but" type="submit">
+          <i class="fa-solid fa-lock" id="loc" aria-hidden="true"></i>
+          Login securely
+        </button>
+
+        <div id="or">
+          <h4 id="ac">Don't have an account? <a href="signup.html" id="sig">Sign up</a></h4>
+        </div>
+      </form>
+    </section>
+
+    <h6 id="copyright"><i class="fa-solid fa-copyright"></i> 2024 SecureBank. All rights reserved.</h6>
+  </div>
+
+  <script>
+    const form = document.getElementById('loginForm');
+    const card = document.getElementById('con');
+    const btn = document.getElementById('but');
+    const togglePass = document.getElementById('togglePass');
+    const passInput = document.getElementById('passInput');
+    const errorPopup = document.getElementById('errorPopup');
+    const errorMsg = document.getElementById('errorMsg');
+
+    window.addEventListener('load', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const errorType = urlParams.get('error');
+      const successType = urlParams.get('success');
+
+      if (successType === 'setup') {
+        errorMsg.innerText = "Account setup successfully! Please login.";
+        errorPopup.style.background = '#2ecc71';
+        errorPopup.style.transform = 'translateY(0)';
+        card.classList.add('shake');
+        setTimeout(() => {
+          errorPopup.style.transform = 'translateY(-150%)';
+        }, 5000);
+        return;
+      }
+
+      if (errorType) {
+        let message = "An authentication error occurred.";
+        if (errorType === 'invalid') message = "Invalid password. Please try again.";
+        if (errorType === 'notfound') message = "Account not found. Please sign up.";
+        if (errorType === 'missing') message = "Please fill in all fields.";
+        if (errorType === 'system') message = "System error. Contact support.";
+
+        errorMsg.innerText = message;
+        errorPopup.style.transform = 'translateY(0)';
+        
+        card.classList.add('shake');
+
+        setTimeout(() => {
+          errorPopup.style.transform = 'translateY(-150%)';
+        }, 5000);
+      }
+    });
+
+    togglePass.addEventListener('click', () => {
+      const type = passInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passInput.setAttribute('type', type);
+      togglePass.classList.toggle('fa-eye');
+      togglePass.classList.toggle('fa-eye-slash');
+    });
+
+    form.addEventListener('submit', () => {
+      btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Authenticating...';
+      btn.style.pointerEvents = 'none';
+      card.classList.remove('shake');
+      void card.offsetWidth;
+      card.classList.add('shake');
+    });
+  </script>
+</body>
+</html>

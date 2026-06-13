@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <link rel="stylesheet" href="signup.css" />
+  <title>Sign Up - SecureBank</title>
+</head>
+<body>
+  <div id="scene">
+    <div id="bg" aria-hidden="true"></div>
+    <div id="veil" aria-hidden="true"></div>
+    <div class="blob b1" aria-hidden="true"></div>
+    <div class="blob b2" aria-hidden="true"></div>
+    <div class="blob b3" aria-hidden="true"></div>
+
+    <div id="errorPopup"><i class="fa-solid fa-circle-exclamation"></i> <span id="errorMsg"></span></div>
+
+    <div id="intro">
+      <div id="brand">
+        <div id="logoIcon" aria-hidden="true"><i class="fa-solid fa-building-columns" style="color:#4F8DFF;"></i></div>
+        <h4>
+          Secure<span class="gradText">bank</span>
+          <span id="tagline">create your account</span>
+        </h4>
+      </div>
+
+      <h3 id="welcome">Join Us! <br><span>Securely sign up</span></h3>
+      <i class="fa-solid fa-shield-halved" id="shield" aria-hidden="true"></i>
+      <h6 id="seq">Use your username and choose a strong password.</h6>
+    </div>
+
+    <section id="con" aria-label="Bank signup">
+      <div id="cardHeader">
+        <div id="top-lo" aria-hidden="true"><i class="fa-solid fa-user-plus" id="in-logo"></i></div>
+        <div>
+          <h3 id="log">Sign Up</h3>
+          <h6 id="ent-text">Create a new account</h6>
+        </div>
+      </div>
+
+      <form class="form" action="signup.php" method="post" autocomplete="on" id="signupForm" novalidate>
+        <div class="input-group">
+          <input type="text" name="fullName" required placeholder=" " aria-label="Full Name" />
+          <label>Full Name</label>
+        </div>
+
+        <div class="input-group">
+          <input type="email" name="email" required placeholder=" " aria-label="Email" />
+          <label>Email Address</label>
+        </div>
+
+        <div class="input-group">
+          <input type="tel" name="mobile" required placeholder=" " aria-label="Mobile" />
+          <label>Mobile Number</label>
+        </div>
+
+        <div class="input-group">
+          <input type="text" name="userName" required placeholder=" " aria-label="Username" />
+          <label>Choose Username</label>
+        </div>
+
+        <div class="input-group">
+          <input type="password" name="password" id="passInput" required placeholder=" " aria-label="Password" />
+          <label>Choose Password</label>
+          <i class="fa-solid fa-eye toggle-pass" id="togglePass"></i>
+        </div>
+
+        <div class="input-group">
+          <input type="password" name="confirmPassword" id="confirmPassInput" required placeholder=" " aria-label="Confirm Password" />
+          <label>Confirm Password</label>
+          <i class="fa-solid fa-eye toggle-pass" id="toggleConfirmPass"></i>
+        </div>
+
+        <div id="ac" style="margin-top:-6px;">
+          Already have an account?
+          <a href="banklogin.html" id="sig">Login</a>
+        </div>
+
+        <button id="but" type="submit">
+          <i class="fa-solid fa-user-check" id="loc" aria-hidden="true"></i>
+          Create account
+        </button>
+      </form>
+
+      <h6 id="copyright"><i class="fa-solid fa-copyright"></i> 2024 SecureBank. All rights reserved.</h6>
+    </section>
+  </div>
+
+  <script>
+    const form = document.getElementById('signupForm');
+    const card = document.getElementById('con');
+    const btn = document.getElementById('but');
+
+    const togglePass = document.getElementById('togglePass');
+    const passInput = document.getElementById('passInput');
+    const toggleConfirmPass = document.getElementById('toggleConfirmPass');
+    const confirmPassInput = document.getElementById('confirmPassInput');
+
+    const errorPopup = document.getElementById('errorPopup');
+    const errorMsg = document.getElementById('errorMsg');
+
+    window.addEventListener('load', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const errorType = urlParams.get('error');
+      const successType = urlParams.get('success');
+
+      if (successType) {
+        const message = "Account created successfully. Please login.";
+        errorMsg.innerText = message;
+        errorPopup.style.background = '#2ecc71';
+        errorPopup.style.transform = 'translateY(0)';
+        card.classList.add('shake');
+        setTimeout(() => { errorPopup.style.transform = 'translateY(-150%)'; }, 5000);
+        return;
+      }
+
+      if (errorType) {
+        let message = "An error occurred.";
+        if (errorType === 'missing') message = "Please fill in all fields.";
+        if (errorType === 'mismatch') message = "Passwords do not match.";
+        if (errorType === 'exists') message = "Username already exists. Choose another.";
+        if (errorType === 'system') message = "System error. Contact support.";
+
+        errorMsg.innerText = message;
+        errorPopup.style.transform = 'translateY(0)';
+        card.classList.add('shake');
+
+        setTimeout(() => {
+          errorPopup.style.transform = 'translateY(-150%)';
+          card.classList.remove('shake');
+        }, 5000);
+      }
+    });
+
+    function setupToggle(toggleEl, inputEl) {
+      toggleEl.addEventListener('click', () => {
+        const type = inputEl.getAttribute('type') === 'password' ? 'text' : 'password';
+        inputEl.setAttribute('type', type);
+        toggleEl.classList.toggle('fa-eye');
+        toggleEl.classList.toggle('fa-eye-slash');
+      });
+    }
+
+    setupToggle(togglePass, passInput);
+    setupToggle(toggleConfirmPass, confirmPassInput);
+
+    form.addEventListener('submit', (e) => {
+      const p1 = passInput.value;
+      const p2 = confirmPassInput.value;
+
+      if (p1 !== p2) {
+        e.preventDefault();
+        errorMsg.innerText = "Passwords do not match.";
+        errorPopup.style.background = '#ff4f4f';
+        errorPopup.style.transform = 'translateY(0)';
+        card.classList.add('shake');
+        setTimeout(() => {
+          errorPopup.style.transform = 'translateY(-150%)';
+        }, 4500);
+        return;
+      }
+
+      btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Creating...';
+      btn.style.pointerEvents = 'none';
+
+      card.classList.remove('shake');
+      void card.offsetWidth;
+      card.classList.add('shake');
+    });
+  </script>
+</body>
+</html>
