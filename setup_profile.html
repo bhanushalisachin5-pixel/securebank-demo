@@ -1,0 +1,64 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+      <link rel="stylesheet" href="signup.css" />
+      <title>Setup Profile - SecureBank</title>
+      <style>#con{width:450px;}</style>
+    </head>
+    <body>
+      <div id="scene">
+        <div id="bg" aria-hidden="true"></div>
+        <div id="veil" aria-hidden="true"></div>
+
+        <div id="intro">
+          <div id="brand">
+            <div id="logoIcon"><i class="fa-solid fa-building-columns" style="color:#4F8DFF;"></i></div>
+            <h4>Secure<span class="gradText">bank</span></h4>
+          </div>
+          <h3 id="welcome">Final Step! <br><span>Setup your finances</span></h3>
+          <h6 id="seq">Tell us about your financial goals to personalize your dashboard.</h6>
+        </div>
+
+        <section id="con">
+          <div id="cardHeader">
+            <div id="top-lo"><i class="fa-solid fa-sliders" id="in-logo"></i></div>
+            <div>
+              <h3 id="log">Financial Profile</h3>
+              <h6 id="ent-text">Set your initial values</h6>
+            </div>
+          </div>
+
+          <form class="form" action="setup_profile.php" method="post">
+            <div class="input-group">
+              <input type="number" step="0.01" name="total_balance" required placeholder=" " />
+              <label>Initial Total Balance ($)</label>
+            </div>
+
+            <div class="input-group">
+              <input type="number" step="0.01" name="monthly_income" required placeholder=" " />
+              <label>Estimated Monthly Income ($)</label>
+            </div>
+
+            <div class="input-group">
+              <input type="number" step="0.01" name="monthly_expenses" required placeholder=" " />
+              <label>Estimated Monthly Expenses ($)</label>
+            </div>
+
+            <div class="input-group">
+              <input type="number" step="0.01" name="savings_goal" required placeholder=" " />
+              <label>Savings Goal ($)</label>
+            </div>
+
+            <button id="but" type="submit">
+              <i class="fa-solid fa-check-double"></i>
+              Finish Setup
+            </button>
+          </form>
+        </section>
+      </div>
+    </body>
+    </html>

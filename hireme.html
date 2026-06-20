@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HireMe AI - Find Your Dream Job</title>
+
+    <link rel="stylesheet" href="hireme.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+    <div id="Body">
+
+        
+        <header>
+
+            <nav id="nav">
+
+                <img src="hirelogo.png" id="logo" alt="HireMe AI Logo">
+
+                <ul>
+                    <li>Home</li>
+                    <li>Find Jobs</li>
+                    <li>Companies</li>
+                    <li>Categories</li>
+                    <li>Resources</li>
+                </ul>
+
+                <i class="fa-regular fa-moon" id="theme"></i>
+
+                <input type="button" id="login" value="Login">
+
+            </nav>
+
+        </header>
+
+
+    
+
+        <main>
+
+            <section id="con">
+
+                <h1>
+
+                    Find Your Dream Job
+                    <br>
+
+                    With
+
+                    <span class="highlight">
+
+                        HireMe AI
+
+                    </span>
+
+                </h1>
+
+                <h4 class="te">
+
+                    Discover top opportunities,
+                    enhance your skills,
+
+                    <br>
+
+                    and build your future with the power of AI.
+
+                </h4>
+
+            </section>
+
+
+            
+
+            <img src="man.png" id="man" alt="Professional Person">
+
+
+    
+            <section id="search-box">
+
+                <i id="search-icon" class="fa-solid fa-search"></i>
+
+                <input
+                    type="search"
+                    id="search"
+                    placeholder="Job title, keywords or company">
+
+
+                <i id="search-icon2" class="fa-solid fa-location-dot"></i>
+
+                <input
+                    type="search"
+                    id="search-location"
+                    placeholder="Location">
+
+
+                <div id="drop-down">
+
+                    <select>
+
+                        <option>Job Type</option>
+
+                        <option>Software Engineer</option>
+
+                        <option>CA</option>
+
+                        <option>Account Manager</option>
+
+                        <option>Salesman</option>
+
+                        <option>Manager</option>
+
+                    </select>
+
+                </div>
+
+
+                <div id="find-job">
+
+                    <input
+                        type="button"
+                        value="Find Jobs"
+                        id="findjob">
+
+                </div>
+
+            </section>
+
+
+    
+
+            <section id="company-work">
+
+                <i class="fa-solid fa-briefcase" id="briefcase"></i>
+
+                <h4 id="breafcase-logo">
+
+                    10k+
+
+                    <br>
+
+                    <span id="breafcase-logoo">
+
+                        Job Opening
+
+                    </span>
+
+                </h4>
+
+
+                <i class="fa-regular fa-building" id="company"></i>
+
+                <h4 id="company-logo">
+
+                    5k+
+
+                    <br>
+
+                    <span id="company-logoo">
+
+                        Company
+
+                    </span>
+
+                </h4>
+
+
+                <i class="fa-regular fa-user" id="user"></i>
+
+                <h4 id="user-logo">
+
+                    20k+
+
+                    <br>
+
+                    <span id="user-logoo">
+
+                        Active Users
+
+                    </span>
+
+                </h4>
+
+
+                <i class="fa-regular fa-file-lines" id="file"></i>
+
+                <h4 id="file-logo">
+
+                    20k+
+
+                    <br>
+
+                    <span id="file-logoo">
+
+                        Active Users
+
+                    </span>
+
+                </h4>
+
+            </section>
+
+                <div id="top-hires">
+
+                            <h2 id="top-hiringtext">top company hiring </h2>
+
+                </div>
+
+        </main>
+
+    </div>
+
+
+    <script>
+
+        const mode = document.getElementById("theme");
+
+        const body = document.body;
+
+        const nav = document.getElementById("nav");
+
+
+        mode.addEventListener("click", function () {
+
+            if (mode.classList.contains("fa-moon")) {
+
+                mode.classList.remove("fa-regular", "fa-moon");
+
+                mode.classList.add("fa-solid", "fa-sun");
+
+
+                body.classList.add("dark");
+
+                nav.classList.add("navdark");
+
+            }
+
+            else {
+
+                nav.classList.remove("navdark");
+
+
+                mode.classList.remove("fa-solid", "fa-sun");
+
+                mode.classList.add("fa-regular", "fa-moon");
+
+
+                body.classList.remove("dark");
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
